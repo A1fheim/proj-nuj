@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>3. Сравнительный анализ - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="3.2.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="3.2.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+<div class="main">
+    <section id="comparison-analysis">
+        <h1>3 Сравнительный анализ</h1>
+        <div class="format-card" id="computational-complexity">
+            <div id="hardware-requirements">
+                <h3>3.2.2 Требования к оборудованию</h3>
+                <p>
+                    Требования к оборудованию определяются не только чистой вычислительной сложностью
+                    видеокодеков, но и уровнем оптимизации, наличием аппаратного ускорения, 
+                    типом контента и режимом использования (офлайн-кодирование, трансляция в реальном 
+                    времени, мобильное воспроизведение). Чем современнее и сложнее кодек, тем выше нагрузка 
+                    на процессор, память и энергосистему устройства. Особенно это заметно при обработке 
+                    высоких разрешений (4K/8K), HDR-контента и высоких частот кадров.
+                </p>
+
+                <p>
+                    Ниже приведены ориентировочные минимальные системные требования для стабильной и 
+                    предсказуемой работы кодеков в условиях программного кодирования и декодирования. 
+                    Реальные требования могут отличаться в зависимости от пресетов скорости, профиля 
+                    качества и используемого ПО.
+                </p>
+
+                <ol>
+                    <li>
+                        <span class="bold-text">H.264:</span> любой современный двухъядерный процессор, 
+                        2 GB RAM. Кодек отличается высокой оптимизацией и повсеместной аппаратной 
+                        поддержкой, что делает его одним из самых лёгких в плане системных требований.
+                    </li>
+
+                    <li>
+                        <span class="bold-text">H.265 / HEVC:</span> 4-ядерный процессор 2.5+ ГГц, 
+                        8 GB RAM. Существенно более сложный алгоритм кодирования требует дополнительных 
+                        ресурсов, особенно при обработке высоких разрешений. Однако HEVC широко 
+                        поддерживается GPU и специализированными декодерами.
+                    </li>
+
+                    <li>
+                        <span class="bold-text">VP9:</span> 6-ядерный процессор 3.0+ ГГц, 16 GB RAM.
+                        VP9 лучше масштабируется на многоядерных системах, но декодирование часто более 
+                        ресурсоёмкое по сравнению с HEVC. Аппаратная поддержка доступна, но встречается 
+                        реже.
+                    </li>
+
+                    <li>
+                        <span class="bold-text">AV1:</span> 8-ядерный процессор 3.5+ ГГц, 32 GB RAM.
+                        Один из самых ресурсоёмких кодеков текущего поколения. Программное кодирование 
+                        требует значительных вычислительных мощностей, а аппаратная поддержка активно 
+                        развивается только с 2022–2023 годов. При наличии аппаратного декодера нагрузка 
+                        заметно снижается.
+                    </li>
+
+                    <li>
+                        <span class="bold-text">VVC / H.266:</span> 16-ядерный процессор, 64 GB RAM и выше.
+                        Экстремально сложный кодек с огромными вычислительными затратами. 
+                        Программное кодирование без специализированного оборудования актуально 
+                        только для исследовательских задач. Массовая аппаратная поддержка пока ограничена 
+                        и ожидается в ближайшие годы.
+                    </li>
+                </ol>
+
+                <p>
+                    Следует отметить, что реальные требования могут резко снижаться при использовании 
+                    аппаратного ускорения (NVENC, QuickSync, VCN, специализированные ASIC-кодеры). 
+                    Например, кодирование HEVC или AV1 на GPU может быть в десятки раз быстрее по сравнению 
+                    с чисто CPU-решениями, а энергопотребление при этом значительно ниже.
+                </p>
+
+                <p>
+                    Таким образом, выбор кодека должен учитывать не только желаемую эффективность 
+                    сжатия, но и доступные аппаратные ресурсы, сценарий применения и требования к 
+                    скорости обработки. В современных системах всё более важным становится наличие 
+                    аппаратной поддержки — без неё использование передовых кодеков зачастую экономически 
+                    и технически неоправданно.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('compression-efficiency'),
+                document.getElementById('computational-complexity'), 
+                document.getElementById('compatibility')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

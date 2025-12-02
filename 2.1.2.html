@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>2. Перспективные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="2.1.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="2.1.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="perspective-formats">
+            <h1>2 Перспективные форматы</h1>
+            
+            <div class="format-card" id="vvc">
+                <div id="vvc-efficiency">
+                    <h3>2.1.2 Улучшения эффективности</h3>
+                    <p>VVC демонстрирует существенные улучшения в эффективности сжатия:</p>
+                    <ol>
+                        <li><span class="bold-text">Сжатие:</span> до 50% лучше H.265/HEVC при том же качестве</li>
+                        <li><span class="bold-text">4K и 8K контент:</span> особенно эффективен для сверхвысоких разрешений</li>
+                        <li><span class="bold-text">HDR поддержка:</span> улучшенная обработка расширенного динамического диапазона</li>
+                        <li><span class="bold-text">360-градусное видео:</span> специальные инструменты для VR контента</li>
+                        <li><span class="bold-text">Разноплановый контент:</span> оптимизация для различных типов видео</li>
+                    </ol>
+                    <p>Тестирование VVC в реальных условиях показывает, что наибольший выигрыш достигается именно на контенте сверхвысоких разрешений, где традиционные методы H.265 начинают показывать свои ограничения. Для 8K контента экономия битрейта может достигать 60%, что делает передачу такого видео по существующим сетевым каналам технически и экономически целесообразной.</p>
+
+                    <p>Особенно впечатляющие результаты VVC демонстрирует при работе с HDR контентом и расширенными цветовыми пространствами, где сложность цветовых переходов традиционно требовала высоких битрейтов. Новые алгоритмы квантизации учитывают особенности человеческого восприятия в условиях высокого динамического диапазона.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('vvc'),
+                document.getElementById('evc'), 
+                document.getElementById('experimental')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.1.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            
+            <div class="format-card" id="h264">
+                <div id="h264-history">
+                    <h3>1.1.1 История развития</h3>
+                    <p>Стандарт H.264 был впервые утвержден в мае 2003 года как результат многолетней совместной работы двух ведущих организаций по стандартизации видео. Проект начался в 1998 году под названием H.26L и изначально разрабатывался ITU-T.</p>
+                    <div class="architecture-diagram">
+                    <img src="ITU-T_SG13.jpg" alt="ITU-T_SG13" width="700">
+                    </div>
+                    
+                    <p>Основными целями разработки H.264 были:</p>
+                    <ol>
+                        <li>Повышение эффективности сжатия на 50% по сравнению с предыдущими стандартами</li>
+                        <li>Обеспечение гибкости для различных применений</li>
+                        <li>Улучшение устойчивости к ошибкам передачи</li>
+                        <li>Снижение вычислительной сложности декодирования</li>
+                    </ol>
+                    <p>Процесс стандартизации H.264 стал примером успешного международного сотрудничества, где конкурирующие технологические концепции были объединены в единый стандарт. Участие ведущих технологических компаний, университетов и исследовательских центров обеспечило всестороннюю оценку и оптимизацию каждого элемента кодека.</p>
+
+                    <p>Ключевым решением стало создание единого стандарта для ITU-T (H.264) и ISO/IEC (MPEG-4 Part 10), что избежало фрагментации рынка и обеспечило широкую совместимость. Это решение заложило основу для повсеместного внедрения стандарта в самых различных областях применения.</p>
+                </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

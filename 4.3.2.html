@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>4. Области применения - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="4.3.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="4.3.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="applications">
+            <h1>4 Области применения</h1>
+            <div class="format-card" id="video-conferencing">
+                <div id="low-latency">
+                    <h3>4.3.2 Низкая задержка</h3>
+                    <p>Минимизация задержки критически важна для естественного общения:</p>
+                    <ol>
+                        <li><span class="bold-text">Общая задержка:</span> не более 150 мс end-to-end</li>
+                        <li><span class="bold-text">Кодирование:</span> 20-50 мс на обработку</li>
+                        <li><span class="bold-text">Передача:</span> оптимизация протоколов (RTP, WebRTC)</li>
+                        <li><span class="bold-text">Декодирование:</span> аппаратное ускорение для минимизации задержки</li>
+                        <li><span class="bold-text">Буферизация:</span> минимальная для реального времени</li>
+                    </ol>
+                    <p>Психология человеческого восприятия устанавливает жесткие границы допустимой задержки в видеосвязи. Задержка свыше 150 мс начинает заметно влиять на естественность диалога, вынуждая участников неосознанно компенсировать паузы, что ведет к усталости и снижению эффективности коммуникации.</p>
+
+<p>Оптимизация для низкой задержки часто противоречит целям максимального сжатия, требуя баланса между эффективностью кодирования и скоростью обработки. Это особенно критично для интерактивных применений, где даже небольшое увеличение задержки может разрушить пользовательский опыт.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('web-tech'),
+                document.getElementById('educational-systems'), 
+                document.getElementById('video-conferencing')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

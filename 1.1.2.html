@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.1.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.1.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            
+            <div class="format-card" id="h264">            
+                <div id="h264-specs">
+                    <h3>1.1.2 Технические характеристики</h3>
+                    <p>Архитектура H.264 основана на гибридной схеме кодирования, которая объединяет несколько передовых технологий:</p>
+                    
+                    <ol>
+                        <li><span class="bold-text">Основной размер макроблока:</span> 16x16 пикселей для компонента яркости</li>
+                        <li><span class="bold-text">Подразделения:</span> макроблоки могут быть разделены на блоки различных размеров</li>
+                        <li><span class="bold-text">Предсказание движения:</span> высокоточная компенсация движения с четвертьпиксельной точностью</li>
+                        <li><span class="bold-text">Энтропийное кодирование:</span> CAVLC и CABAC для максимального сжатия</li>
+                        <li><span class="bold-text">Деблокинг:</span> встроенный фильтр для улучшения визуального качества</li>
+                    </ol>
+                    <p>Гибридная архитектура H.264 объединяет временное предсказание (использование предыдущих кадров), пространственное предсказание (анализ соседних блоков) и трансформационное кодирование в единую оптимизированную систему. Каждый компонент был тщательно настроен для работы в синергии с остальными элементами.</p>
+
+                    <p>Особенностью H.264 является адаптивность алгоритмов к характеристикам контента - кодек автоматически выбирает оптимальные параметры для каждого типа видеоматериала, от статичных сцен до высокодинамичного спортивного контента. Это обеспечивает стабильно высокое качество независимо от сложности исходного материала.</p>
+                </div>
+            </div>      
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

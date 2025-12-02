@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>4. Области применения - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="4.1.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="4.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="applications">
+            <h1>4 Области применения</h1> 
+            <div class="format-card" id="web-tech">
+                <div id="adaptive-bitrate">
+                    <h3>4.1.3 Адаптивный битрейт</h3>
+                    <p>Технология адаптивного битрейта обеспечивает оптимальное качество просмотра:</p>
+                    <ol>
+                        <li><span class="bold-text">HLS (HTTP Live Streaming):</span> стандарт Apple, поддержка H.264/H.265</li>
+                        <li><span class="bold-text">DASH (Dynamic Adaptive Streaming):</span> открытый стандарт, поддержка множества кодеков</li>
+                        <li><span class="bold-text">Smooth Streaming:</span> технология Microsoft</li>
+                        <li><span class="bold-text">WebRTC:</span> для видеозвонков в реальном времени</li>
+                    </ol>
+                    
+                    <p>Преимущества адаптивного битрейта:</p>
+                    <ol>
+                        <li>Автоматическая адаптация к скорости соединения</li>
+                        <li>Минимизация буферизации</li>
+                        <li>Оптимизация использования полосы пропускания</li>
+                        <li>Улучшение пользовательского опыта</li>
+                    </ol>
+                    <p>Современные системы адаптивного битрейта используют машинное обучение для предсказания изменений качества сети, что позволяет превентивно корректировать параметры потока еще до возникновения проблем. Такой подход минимизирует видимые переключения качества и обеспечивает более стабильный пользовательский опыт.</p>
+
+<p>Интеграция с CDN (Content Delivery Networks) позволяет оптимизировать доставку контента на глобальном уровне, автоматически направляя запросы к ближайшим серверам и адаптируя качество под региональные особенности интернет-инфраструктуры.</p>
+                </div>
+                <div class="architecture-diagram">
+                <img src="jlRRws.gif" alt="ff" width="700">
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('web-tech'),
+                document.getElementById('educational-systems'), 
+                document.getElementById('video-conferencing')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>4. Области применения - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="4.1.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="4.1.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="applications">
+            <h1>4 Области применения</h1>
+            <div class="format-card" id="web-tech">
+                <div id="streaming-platforms">
+                    <h3>4.1.2 Стриминговые платформы</h3>
+                    <p>Основные стриминговые сервисы используют различные стратегии кодирования:</p>
+                    
+                    <h4>Netflix</h4>
+                    <ol>
+                        <li>Основной кодек: H.264 для широкой совместимости</li>
+                        <li>Премиум качество: H.265 для 4K контента</li>
+                        <li>Экспериментальное использование AV1</li>
+                        <li>Собственная метрика качества VMAF</li>
+                    </ol>
+                    
+                    <h4>YouTube</h4>
+                    <ol>
+                        <li>Стандарт: H.264 для всего контента</li>
+                        <li>Высокое качество: VP9 для видео 1080p и выше</li>
+                        <li>Новейший стандарт: AV1 для отдельного контента</li>
+                        <li>Адаптивный битрейт для различных соединений</li>
+                    </ol>
+                    
+                    <h4>Amazon Prime Video</h4>
+                    <ol>
+                        <li>Многоформатный подход: H.264/H.265 в зависимости от устройства</li>
+                        <li>4K HDR контент через H.265</li>
+                        <li>Тестирование AV1 для снижения затрат на CDN</li>
+                    </ol>
+                    <p>Стратегии кодирования крупных платформ отражают их бизнес-приоритеты и техническую инфраструктуру. Netflix инвестирует в собственные исследования качества видео, разрабатывая метрики, коррелирующие с субъективным восприятием зрителей. YouTube, обслуживая миллиарды часов контента ежедневно, фокусируется на автоматизации и масштабируемости обработки.</p>
+
+<p>Выбор кодеков также определяется региональными особенностями - в развивающихся рынках с медленными соединениями приоритет отдается совместимости H.264, в то время как в регионах с развитой инфраструктурой активно внедряются новейшие стандарты для оптимизации затрат на доставку контента.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('web-tech'),
+                document.getElementById('educational-systems'), 
+                document.getElementById('video-conferencing')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

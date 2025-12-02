@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>4. Области применения - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="4.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="4.1.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="applications">
+            <h1>4 Области применения</h1>      
+            <div class="format-card" id="web-tech">
+                <div id="html5-video">
+                    <h3>4.1.1 HTML5 video</h3>
+                    <p>HTML5 video элемент революционизировал веб-видео, заменив Flash-технологии:</p>
+                    <ol>
+                        <li><span class="bold-text">Нативная поддержка:</span> видео воспроизводится напрямую в браузере без плагинов</li>
+                        <li><span class="bold-text">Кроссплатформенность:</span> работает на всех устройствах и операционных системах</li>
+                        <li><span class="bold-text">API управления:</span> JavaScript API для создания пользовательских плееров</li>
+                        <li><span class="bold-text">Доступность:</span> встроенная поддержка субтитров и аудиодорожек</li>
+                        <li><span class="bold-text">SEO-дружелюбность:</span> видео индексируется поисковыми системами</li>
+                    </ol>
+                    
+                    <p>Рекомендуемые форматы для HTML5:</p>
+                    <ol>
+                        <li>H.264 - для максимальной совместимости</li>
+                        <li>VP9 - для оптимизации размера файлов</li>
+                        <li>AV1 - для новейших браузеров и лучшего качества</li>
+                    </ol>
+                    <p>Переход на HTML5 video стал поворотным моментом в истории веб-видео, устранив зависимость от проприетарных плагинов и обеспечив единообразный опыт на всех платформах. Браузеры получили возможность нативной оптимизации воспроизведения, включая аппаратное ускорение и энергосбережение на мобильных устройствах.</p>
+
+<p>Современные браузеры автоматически выбирают оптимальный кодек из предложенных вариантов, используя механизм fallback для обеспечения максимальной совместимости. Это позволяет разработчикам предоставлять новейшие форматы для поддерживающих устройств, сохраняя работоспособность на устаревших системах.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('web-tech'),
+                document.getElementById('educational-systems'), 
+                document.getElementById('video-conferencing')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

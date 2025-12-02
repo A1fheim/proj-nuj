@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.2.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            <div class="format-card" id="h265">
+                <div id="h265-usage">
+                    <h3>1.2.3 Практическое применение</h3>
+                    <p>H.265 находит широкое применение в современных системах:</p>
+                    <ol>
+                        <li>4K и 8K телевещание</li>
+                        <li>Потоковые сервисы (Netflix, Amazon Prime Video)</li>
+                        <li>Системы видеонаблюдения</li>
+                        <li>Мобильные устройства с поддержкой аппаратного декодирования</li>
+                        <li>VR и 360-градусное видео</li>
+                    </ol>
+                    <p>Разработка H.265 была мотивирована растущими требованиями к качеству видео и необходимостью эффективной передачи контента Ultra HD. Кодек внедряет концепцию адаптивного разделения блоков, где размер кодируемых единиц динамически подстраивается под характеристики изображения, обеспечивая оптимальное соотношение качества и битрейта.</p>
+
+                    <p>Важным нововведением стала поддержка параллельной обработки на аппаратном уровне. Tiles и Wavefront Parallel Processing позволяют эффективно использовать многоядерные процессоры и специализированные видеоускорители, что критично для обработки видео высокого разрешения в реальном времени.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

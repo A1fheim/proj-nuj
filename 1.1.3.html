@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.1.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            <div class="format-card" id="h264">
+                
+                <div id="h264-profiles">
+                    <h3>1.1.3 Профили и уровни</h3>
+                    <p>H.264 определяет различные профили и уровни для обеспечения совместимости:</p>
+                    <ol>
+                        <li><span class="bold-text">Baseline Profile:</span> для мобильных устройств и видеоконференций</li>
+                        <li><span class="bold-text">Main Profile:</span> для цифрового телевидения стандартной четкости</li>
+                        <li><span class="bold-text">High Profile:</span> для HDTV и Blu-ray дисков</li>
+                        <li><span class="bold-text">High 10 Profile:</span> поддержка 10-битной глубины цвета</li>
+                    </ol>
+                    <p>В процессе разработки H.264 особое внимание уделялось созданию универсального кодека, способного работать в широком спектре условий - от низкоскоростных мобильных соединений до высококачественного телевещания. Кодек поддерживает адаптивную потоковую передачу, что позволяет автоматически подстраивать качество видео под доступную пропускную способность канала связи.</p>
+
+<p>Одной из революционных особенностей H.264 стала возможность использования множественных референсных кадров - до 16 кадров для предсказания движения. Это значительно повысило эффективность сжатия, особенно для видео со сложным движением объектов или сцен с периодически повторяющимися элементами.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

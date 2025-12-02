@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.4.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="2.1.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            <div class="format-card" id="av1">
+                <div id="av1-performance">
+                    <h3>1.4.3 Производительность</h3>
+                    <p>AV1 демонстрирует впечатляющие результаты сжатия:</p>
+                    <ol>
+                        <li><span class="bold-text">Эффективность:</span> до 30% лучше VP9, до 50% лучше H.264</li>
+                        <li><span class="bold-text">HDR поддержка:</span> встроенная поддержка широкого цветового охвата</li>
+                        <li><span class="bold-text">Масштабируемость:</span> от мобильных устройств до 8K телевидения</li>
+                        <li><span class="bold-text">Параллелизм:</span> оптимизация для многоядерных процессоров</li>
+                        <li><span class="bold-text">Адаптивность:</span> динамическая настройка под контент</li>
+                    </ol>
+                    <p>AV1 представляет собой кульминацию многолетних исследований в области видеокодирования, объединяя лучшие наработки предыдущих поколений кодеков. Архитектура AV1 построена на модульном принципе, где каждый компонент может быть независимо оптимизирован и улучшен без нарушения совместимости.</p>
+
+<p>Революционной особенностью AV1 является интеграция машинного обучения на этапе разработки алгоритмов. Нейронные сети использовались для оптимизации параметров кодирования, анализа визуального восприятия и создания более эффективных предсказательных моделей, что позволило достичь беспрецедентной эффективности сжатия.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.3.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.4.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            <div class="format-card" id="vp9">
+                <div id="vp9-web">
+                    <h3>1.3.3 Веб-интеграция</h3>
+                    <p>VP9 имеет отличную поддержку в веб-экосистеме:</p>
+                    <ol>
+                        <li><span class="bold-text">Браузеры:</span> Chrome, Firefox, Edge, Opera</li>
+                        <li><span class="bold-text">YouTube:</span> основной кодек для видео высокого качества</li>
+                        <li><span class="bold-text">WebRTC:</span> поддержка видеозвонков в реальном времени</li>
+                        <li><span class="bold-text">HTML5:</span> нативная поддержка в video элементе</li>
+                    </ol>
+                    <p>Философия разработки VP9 базировалась на принципе "интернет-первый", что означало оптимизацию кодека специально для потоковой передачи через веб. В отличие от традиционных кодеков, VP9 изначально проектировался с учетом вариативности качества интернет-соединений и необходимости адаптивной потоковой передачи.</p>
+
+                    <p>Особое внимание в VP9 уделено эффективности кодирования контента с экрана - презентаций, игрового видео, скринкастов. Специальные алгоритмы распознают повторяющиеся паттерны и текстовые элементы, применяя к ним оптимизированные методы сжатия.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

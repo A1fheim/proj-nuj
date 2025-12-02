@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.1.3.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.2.1.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            <div class="format-card" id="h265">
+                <h2>1.2 H.265/HEVC (High Efficiency Video Coding)</h2>
+<p>H.265/HEVC представляет собой следующее поколение видеокодеков и является логическим продолжением развития технологий цифрового видеосжатия после H.264/AVC. Этот стандарт был создан с целью обеспечить еще более высокую эффективность кодирования, позволяя достичь до 50% лучшего сжатия по сравнению с H.264 при сохранении сопоставимого уровня визуального качества. Благодаря этому HEVC стал особенно актуален в условиях стремительного роста разрешений и увеличения сложности видеоконтента, где требуется передавать значительные объёмы данных без чрезмерной нагрузки на сетевые ресурсы.</p>
+
+<p>Разработка H.265/HEVC осуществлялась при участии крупных международных исследовательских групп, включая ITU-T и ISO/IEC, что обеспечило стандартизированный подход и широкую совместимость с существующими системами. HEVC был ориентирован в первую очередь на обработку видеоматериалов высокой четкости (HD), а также сверхвысокой четкости (UHD и 4K/8K), где традиционные методы сжатия оказываются недостаточно эффективными. Стандарт внедряет целый ряд технологических улучшений: увеличенные размеры кодируемых блоков, более точные алгоритмы межкадрового и внутрикадрового прогнозирования, расширенный набор инструментов для снижения шума и повышения детализации, а также более сложные режимы адаптивного квантования.</p>
+
+<p>Благодаря этим улучшениям H.265 демонстрирует превосходную производительность в различных сценариях использования — от потоковых сервисов и видеоконференций до профессиональной киноиндустрии и систем видеонаблюдения. Он позволяет существенно экономить пропускную способность сети и снижать требования к хранилищу данных при работе с высококачественным видео. В результате HEVC стал ключевым компонентом в экосистеме современных мультимедийных технологий и подготовил почву для дальнейших исследований и разработок, включая создание следующего поколения кодеков, таких как H.266/VVC.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

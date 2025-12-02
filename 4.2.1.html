@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>4. Области применения - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="4.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="4.2.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="applications">
+            <h1>4 Области применения</h1>
+            <div class="format-card" id="educational-systems">
+                <div id="distance-learning">
+                    <h3>4.2.1 Дистанционное обучение</h3>
+                    <p>Дистанционное обучение предъявляет особые требования к видеоформатам:</p>
+                    <ol>
+                        <li><span class="bold-text">Лекции и семинары:</span> H.264 для записи длительного контента</li>
+                        <li><span class="bold-text">Интерактивные уроки:</span> низкая задержка для взаимодействия в реальном времени</li>
+                        <li><span class="bold-text">Демонстрации:</span> высокое качество для детальной визуализации процессов</li>
+                        <li><span class="bold-text">Мобильное обучение:</span> оптимизация для слабых интернет-соединений</li>
+                    </ol>
+                    
+                    <p>Платформы дистанционного обучения:</p>
+                    <ol>
+                        <li><span class="bold-text">Zoom:</span> H.264 с аппаратным ускорением</li>
+                        <li><span class="bold-text">Microsoft Teams:</span> H.264/H.265 в зависимости от устройства</li>
+                        <li><span class="bold-text">Google Meet:</span> VP8/VP9 для браузерного использования</li>
+                        <li><span class="bold-text">Coursera/edX:</span> адаптивные форматы для глобальной аудитории</li>
+                    </ol>
+                    <p>Пандемия COVID-19 ускорила развитие дистанционного обучения, выявив критическую важность надежного видеокодирования для образовательного процесса. Платформы были вынуждены быстро масштабироваться, оптимизируя алгоритмы для работы в условиях перегруженных домашних сетей и устаревшего оборудования.</p>
+
+<p>Особым вызовом стала необходимость поддержки одновременного участия сотен студентов в видеоконференциях, что потребовало инновационных решений в области многопоточного кодирования и интеллектуального переключения между различными режимами качества в зависимости от активности участников.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('web-tech'),
+                document.getElementById('educational-systems'), 
+                document.getElementById('video-conferencing')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>3. Сравнительный анализ - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="3.2.3.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="3.3.1.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="comparison-analysis">
+            <h1>3 Сравнительный анализ</h1>
+            <div class="format-card" id="compatibility">
+                <h2>3.3 Совместимость</h2>
+<p>Совместимость является ключевым показателем, определяющим реальную применимость видеокодеков в широком спектре экосистем, платформ и устройств. Она отражает, насколько легко кодек интегрируется в существующую инфраструктуру, включая операционные системы, браузеры, мобильные устройства, телевизоры, мультимедийные плееры и профессиональные системы обработки видео. Широкая поддержка на аппаратном и программном уровне позволяет использовать кодек без ограничений, обеспечивая стабильное воспроизведение, низкую задержку и предсказуемое качество в самых разных условиях.
+
+При отсутствии достаточной совместимости даже технологически продвинутый кодек может столкнуться с трудностями внедрения. Производители устройств и разработчики ПО часто ориентируются на экономическую целесообразность, зрелость технологии и доступность аппаратного ускорения. Поэтому кодеки, способные работать только при программном декодировании или имеющие ограниченную поддержку драйверов, нередко уступают позициям более универсальным решениям.
+
+Кроме того, важную роль играет обратная совместимость с предыдущими поколениями стандартов. Она позволяет пользователям и сервисам плавно переходить на новые технологии без необходимости полного обновления оборудования или инфраструктуры.
+
+Таким образом, совместимость определяет не только техническую гибкость кодека, но и его способность закрепиться на рынке, стать массовым и применяться в гетерогенных средах, где требуется стабильная работа с минимальными ограничениями.</p>            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('compression-efficiency'),
+                document.getElementById('computational-complexity'), 
+                document.getElementById('compatibility')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

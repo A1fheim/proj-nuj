@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>2. Перспективные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.4.3.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="2.1.1.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="perspective-formats">
+            <h1>2 Перспективные форматы</h1>
+            
+            <div class="format-card" id="vvc">
+                <h2>2.1 VVC/H.266 (Versatile Video Coding)</h2>
+<p>H.266/VVC представляет собой новейшее поколение стандартов видеокодирования и является прямым преемником H.265/HEVC. Он был официально утверждён организациями ITU-T и ISO/IEC в 2020 году после многолетних исследований и совместных усилий ведущих экспертов в области кодирования видео. Основная цель разработки VVC заключалась в создании высокоэффективного стандарта, способного справляться с возрастающими требованиями к качеству изображения, объёмам данных и пропускной способности сетей, что особенно актуально в эпоху широкого распространения видео сверхвысокого разрешения.</p>
+
+<p>H.266/VVC ориентирован на эффективную работу с видеоконтентом 4K, 8K и даже более высоких разрешений, а также поддерживает такие современные технологии, как HDR, высокие частоты кадров, многослойные структуры видео и улучшенное кодирование для виртуальной и дополненной реальности. По сравнению с H.265/HEVC новый стандарт обеспечивает примерно в два раза лучшую эффективность сжатия, позволяя существенно уменьшать битрейт при сохранении такого же или более высокого уровня визуального качества. Это особенно важно для стриминговых сервисов, операторов связи, платформ видеоконференций и контент-провайдеров, которым необходимо передавать огромные объёмы данных при минимальных затратах ресурсов.</p>
+
+<p>С технической точки зрения VVC включает широкий набор улучшений: более гибкую структуру деления блоков, расширенные методы межкадрового и внутрикадрового предсказания, усовершенствованные алгоритмы компенсации движения, а также новые фильтры для повышения точности реконструкции изображений. Эти нововведения обеспечивают детализированное и точное кодирование даже в сложных сценах, содержащих высокую динамику, текстуры или мелкие детали.</p>
+
+<p>Благодаря своим возможностям H.266/VVC рассматривается как ключевой стандарт для следующего десятилетия развития видеокоммуникаций. Он создаёт фундамент для будущих мультимедийных сервисов, включая облачный гейминг, кинотеатральный и вещательный контент, профессиональное производство видео и любые сценарии, требующие высокой эффективности и качества изображения. Несмотря на то, что аппаратная поддержка VVC ещё находится на этапе активного внедрения, его потенциал делает этот стандарт одним из наиболее перспективных решений в индустрии видеокодирования.</p>
+                <div class="architecture-diagram">
+                    <img src="vvc_h266_codec.jpg" alt="vvc" width="700">
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('vvc'),
+                document.getElementById('evc'), 
+                document.getElementById('experimental')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

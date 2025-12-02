@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.3.3.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.4.1.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            <div class="format-card" id="av1">
+                <h2>1.4 AV1</h2>
+<p>AV1 — новейший открытый видеокодек, разработанный консорциумом Alliance for Open Media, в который входят ведущие технологические компании, включая Google, Amazon, Netflix, Microsoft, Mozilla и ряд других ключевых участников индустрии. Создание AV1 стало ответом на растущую потребность в более эффективных, свободных от патентных ограничений технологиях видеосжатия, способных удовлетворить требования современного интернета, ультравысоких разрешений и масштабируемых мультимедийных платформ.</p>
+
+<p>Этот кодек представляет собой наиболее современный и продвинутый стандарт видеокодирования, предлагающий исключительную эффективность сжатия. Он обеспечивает значительное снижение битрейта по сравнению с предыдущими поколениями, такими как H.264, VP9 и даже H.265/HEVC, при этом сохраняя или превосходя их визуальное качество. Такая высокая эффективность стала возможна благодаря внедрению комплекса прогрессивных технологий: расширенных методов предсказания движения, увеличенного набора фильтров, более гибкой структуры кодируемых блоков и улучшенных механизмов адаптивного кодирования. Все эти улучшения делают AV1 особенно подходящим для работы с видео в 4K, 8K, HDR и других видах высококачественного контента.</p>
+
+<p>Одним из ключевых отличительных преимуществ AV1 является полное отсутствие патентных ограничений и лицензионных платежей. Это делает его чрезвычайно привлекательным для разработчиков веб-сервисов, производителей устройств, стриминговых платформ и компаний, работающих с большими объёмами видеоконтента. Благодаря открытой лицензии и поддержке крупнейших игроков рынка AV1 стремительно распространяется в индустрии и становится новым стандартом для потокового видео и мультимедийных технологий будущего.</p>
+
+<p>В целом, AV1 является значимым шагом вперёд в эволюции видеокодирования, обеспечивая оптимальное сочетание эффективности, качества и доступности. Он уже активно внедряется в современные браузеры, онлайн-сервисы и аппаратные решения, формируя основу для следующего поколения видеоконтента и открытых медийных технологий.</p>
+                <div class="architecture-diagram">
+                    <img src="AV1_logo_2018.svg" alt="avi" width="700">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>3. Сравнительный анализ - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="3.2.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="3.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+<div class="main">
+    <section id="comparison-analysis">
+        <h1>3 Сравнительный анализ</h1>
+        <div class="format-card" id="computational-complexity">
+            <div id="power-consumption">
+                <h3>3.2.3 Энергопотребление</h3>
+                <p>
+                    Энергопотребление при кодировании и декодировании видео напрямую связано с 
+                    вычислительной сложностью алгоритмов и наличием аппаратного ускорения. 
+                    Чем выше нагрузка на процессор и графический ускоритель, тем быстрее разряжается 
+                    аккумулятор мобильных устройств и тем выше суммарные эксплуатационные затраты 
+                    в серверных и облачных инфраструктурах. Для ряда сценариев — от мобильного просмотра 
+                    до крупномасштабных видеосервисов — именно энергопотребление становится 
+                    определяющим фактором при выборе кодека.
+                </p>
+                <p>
+                    Ниже приведены обобщённые рекомендации по использованию различных кодеков 
+                    в зависимости от типа устройства и типичных условий эксплуатации. 
+                    Они учитывают как текущий уровень аппаратной поддержки, так и практический 
+                    опыт применения кодеков в реальных системах.
+                </p>
+
+                <ol>
+                    <li>
+                        <span class="bold-text">Мобильные устройства:</span>
+                        H.264 остаётся наиболее энергоэффективным решением благодаря широкой 
+                        аппаратной поддержке в системах-на-кристалле (SoC) большинства смартфонов. 
+                        Декодирование H.264, как правило, выполняется на специализированных блоках 
+                        с очень низким энергопотреблением, что позволяет воспроизводить видео в течение 
+                        длительного времени без существенной нагрузки на аккумулятор.
+                    </li>
+
+                    <li>
+                        <span class="bold-text">Планшеты:</span>
+                        H.265/HEVC с аппаратным ускорением является приемлемым компромиссом между 
+                        качеством, битрейтом и энергопотреблением. При наличии аппаратного декодера 
+                        энергозатраты остаются на разумном уровне, а выигрыш по сжатию по сравнению 
+                        с H.264 позволяет снизить нагрузку на сеть и объём передаваемых данных.
+                    </li>
+
+                    <li>
+                        <span class="bold-text">Ноутбуки:</span>
+                        VP9 возможен при работе от сети или при наличии эффективного GPU-ускорения. 
+                        При чисто программном декодировании расход энергии заметно возрастает, 
+                        что сокращает время автономной работы. Однако для интернет-сервисов, 
+                        активно использующих VP9 (например, потоковое видео в браузере), поддержка 
+                        аппаратного декодера на современных видеокартах и интегрированной графике 
+                        делает его использование вполне оправданным.
+                    </li>
+
+                    <li>
+                        <span class="bold-text">Десктопы:</span>
+                        AV1 доступен для мощных систем, особенно оборудованных современными видеокартами 
+                        с аппаратным декодированием AV1. В таком случае энергопотребление остаётся 
+                        сопоставимым или даже ниже, чем у VP9 и HEVC при лучшей эффективности сжатия. 
+                        Однако при программном декодировании AV1 нагрузка на CPU и энергозатраты 
+                        существенно возрастают.
+                    </li>
+
+                    <li>
+                        <span class="bold-text">Серверы:</span>
+                        VVC требует специализированного оборудования и тщательно спроектированной 
+                        инфраструктуры. Программное кодирование и декодирование VVC на CPU крайне 
+                        энергоёмко и целесообразно лишь в исследовательских или узкоспециализированных 
+                        задачах. Для промышленного использования предполагается применение 
+                        специализированных ASIC, FPGA или высокопроизводительных GPU, что позволяет 
+                        снизить удельное энергопотребление на один поток видео.
+                    </li>
+                </ol>
+
+                <p>
+                    При выборе кодека необходимо учитывать не только качество и степень 
+                    сжатия, но и энергетическую стоимость его использования на целевой платформе. 
+                    Для мобильных и автономных устройств приоритет отдается кодекам с широкой 
+                    аппаратной поддержкой и минимальным энергопотреблением, тогда как в серверных 
+                    системах возможна ориентация на более сложные кодеки при условии применения 
+                    специализированных аппаратных решений.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('compression-efficiency'),
+                document.getElementById('computational-complexity'), 
+                document.getElementById('compatibility')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

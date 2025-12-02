@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="vvedenie.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.1.1.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            
+            <div class="format-card" id="h264">
+                <h2>1.1 H.264/AVC (Advanced Video Coding)</h2>
+<p>H.264/AVC представляет собой один из наиболее широко используемых и технологически продвинутых стандартов видеокодирования в современном мире. Он был разработан совместными усилиями двух ключевых международных организаций: ITU-T Video Coding Experts Group (VCEG) и ISO/IEC Moving Picture Experts Group (MPEG). Такое сотрудничество позволило объединить передовые идеи и технический опыт, что привело к созданию стандарта, обеспечивающего высокую степень эффективности сжатия. Благодаря этому H.264 позволяет значительно уменьшить размер видеоданных без заметного ухудшения визуального качества изображения.</p>
+
+<p>Одним из главных преимуществ H.264 является его способность обеспечивать превосходное соотношение между качеством видео и размером файла, что делает данный стандарт оптимальным выбором для широкого спектра приложений — от потокового вещания и видеоконференций до профессионального монтажа и записи видеонаблюдения. В отличие от более ранних стандартов, таких как MPEG-2 или H.263, H.264 использует более сложные алгоритмы прогнозирования, адаптивное квантование и продвинутые методы фильтрации, что позволяет добиваться высоких результатов даже при ограниченной пропускной способности сети.</p>
+
+<p>Благодаря своей универсальности и эффективности H.264/AVC стал фактическим отраслевым стандартом для большинства современных видеосервисов и устройств. Он широко применяется в онлайн-платформах, мобильных устройствах, цифровых камерах, системах видеонаблюдения, а также во множестве профессиональных решений. Сочетание гибкости, высокого качества и хорошей производительности сделало этот стандарт ключевым инструментом в индустрии цифрового видео и основой для дальнейших разработок в области кодирования, включая такие форматы, как H.265/HEVC и более новые поколения кодеков.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

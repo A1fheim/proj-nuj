@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>2. Перспективные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="2.2.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="2.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="perspective-formats">
+            <h1>2 Перспективные форматы</h1>
+            <div class="format-card" id="evc">
+                <div id="evc-commercial">
+                    <h3>2.2.3 Коммерческое применение</h3>
+                    <p>EVC привлекателен для коммерческих решений:</p>
+                    <ol>
+                        <li><span class="bold-text">Предсказуемые расходы:</span> четкие лицензионные условия</li>
+                        <li><span class="bold-text">Гибкость выбора:</span> возможность выбора уровня технологий</li>
+                        <li><span class="bold-text">Промышленная поддержка:</span> Samsung, Huawei, MediaTek и другие</li>
+                        <li><span class="bold-text">Целевые рынки:</span> мобильные устройства, видеонаблюдение, OTT</li>
+                        <li><span class="bold-text">Внедрение:</span> первые продукты появились в 2021-2022 годах</li>
+                    </ol>
+                    <p>Стратегия EVC заключается в предоставлении разработчикам четкого выбора между стоимостью лицензирования и техническими возможностями. Baseline Profile позволяет избежать новых патентных рисков, используя только проверенные временем технологии H.264, в то время как Main Profile добавляет современные инструменты сжатия с контролируемыми лицензионными обязательствами.</p>
+
+                    <p>Особенно привлекательным EVC выглядит для развивающихся рынков и стартапов, где предсказуемость расходов на лицензирование критична для бизнес-планирования. Крупные производители электроники рассматривают EVC как страховку против потенциальных патентных споров и возможность диверсифицировать технологические риски.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('vvc'),
+                document.getElementById('evc'), 
+                document.getElementById('experimental')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

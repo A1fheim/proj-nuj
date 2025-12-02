@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>3. Сравнительный анализ - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="3.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="3.2.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+    <section id="comparison-analysis">
+        <h1>3 Сравнительный анализ</h1>
+        <div class="format-card" id="computational-complexity">
+            <div id="encoding-time">
+                <h3>3.2.1 Время кодирования</h3>
+                <p>
+                    Время кодирования является одним из ключевых параметров вычислительной сложности
+                    видеокодеков и напрямую влияет на возможность их практического применения в реальных
+                    сценариях. Чем сложнее алгоритмы предсказания, поиска движения и постобработки,
+                    тем больше ресурсов требуется для достижения высокой степени сжатия и качества
+                    изображения. Поэтому при сравнении кодеков важно учитывать не только выигрыш по
+                    битрейту, но и стоимость этого выигрыша в виде дополнительного времени обработки
+                    и энергопотребления.
+                </p>
+                <p>
+                    В таблице ниже приведены ориентировочные значения относительного времени кодирования,
+                    нормированные по отношению к H.264/x264, принятому за базовую линию (1.0x).
+                    Параллельно приведены оценки времени декодирования и энергопотребления, которые
+                    особенно важны для мобильных устройств, встроенных систем и масштабных серверных
+                    решений.
+                </p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Кодек</th>
+                            <th>Время кодирования (x264 = 1.0)</th>
+                            <th>Время декодирования</th>
+                            <th>Энергопотребление</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>H.264/AVC</td>
+                            <td>1.0x (быстрое)</td>
+                            <td>Низкое</td>
+                            <td>Низкое</td>
+                        </tr>
+                        <tr>
+                            <td>H.265/HEVC</td>
+                            <td>5–15x (медленное)</td>
+                            <td>Умеренное</td>
+                            <td>Умеренное</td>
+                        </tr>
+                        <tr>
+                            <td>VP9</td>
+                            <td>10–25x (очень медленное)</td>
+                            <td>Высокое</td>
+                            <td>Высокое</td>
+                        </tr>
+                        <tr>
+                            <td>AV1</td>
+                            <td>50–200x (крайне медленное)</td>
+                            <td>Очень высокое</td>
+                            <td>Очень высокое</td>
+                        </tr>
+                        <tr>
+                            <td>VVC/H.266</td>
+                            <td>100–500x (исключительно медленное)</td>
+                            <td>Чрезвычайно высокое</td>
+                            <td>Чрезвычайно высокое</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Из таблицы видно, что переход к более современным стандартам кодирования сопровождается
+                    экспоненциальным ростом времени кодирования и требований к вычислительным ресурсам.
+                    H.264 остаётся наиболее быстрым и энергоэффективным решением, что делает его
+                    привлекательным для сценариев с ограниченными ресурсами и для устройств без
+                    специализированного аппаратного ускорения.
+                </p>
+                <p>
+                    HEVC, VP9 и особенно AV1 и VVC демонстрируют заметно более высокую эффективность
+                    сжатия, однако это достигается ценой серьёзного увеличения временных и энергетических
+                    затрат. В офлайн-сценариях (архивирование, подготовка VOD-каталога) такое увеличение
+                    зачастую оправдано, поскольку позволяет существенно снизить битрейт и нагрузку на сеть.
+                    В реальном времени, например при живом стриминге или видеоконференциях, подобная
+                    вычислительная сложность может стать критическим ограничением и требует либо
+                    аппаратного ускорения, либо упрощённых профилей и пресетов кодирования.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('compression-efficiency'),
+                document.getElementById('computational-complexity'), 
+                document.getElementById('compatibility')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

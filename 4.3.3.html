@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>4. Области применения - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="4.3.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="zakluchenie.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="applications">
+            <h1>4 Области применения</h1>
+            <div class="format-card" id="video-conferencing">
+                <div id="connection-quality">
+                    <h3>4.3.3 Качество связи</h3>
+                    <p>Адаптация к изменяющимся условиям сети:</p>
+                    <ol>
+                        <li><span class="bold-text">Динамическая адаптация битрейта:</span> изменение качества в реальном времени</li>
+                        <li><span class="bold-text">Обнаружение потерь пакетов:</span> быстрое реагирование на проблемы сети</li>
+                        <li><span class="bold-text">Коррекция ошибок:</span> FEC для восстановления потерянных данных</li>
+                        <li><span class="bold-text">Приоритизация:</span> важные кадры передаются с высоким приоритетом</li>
+                        <li><span class="bold-text">Graceful degradation:</span> плавное снижение качества при ухудшении связи</li>
+                    </ol>
+                    <p>Современные алгоритмы адаптации используют комплексный анализ сетевых условий, включая не только пропускную способность, но и стабильность соединения, джиттер и историю потерь пакетов. Это позволяет системе превентивно реагировать на ухудшение связи, избегая резких скачков качества.</p>
+
+<p>Интеграция машинного обучения в системы управления качеством связи позволяет персонализировать параметры кодирования под индивидуальные особенности сетевого окружения пользователей, учитывая паттерны использования интернета в различное время суток и дни недели.</p>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>Развлекательные медиа</h3>
+                    <p>Netflix, YouTube, Disney+ используют комбинацию H.264/H.265/AV1 для оптимального качества при минимальных затратах на CDN</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Видеонаблюдение</h3>
+                    <p>H.264 остается стандартом благодаря надежности, широкой поддержке и оптимизации для круглосуточной записи</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Медицина</h3>
+                    <p>Высококачественные форматы для медицинской визуализации требуют lossless или near-lossless сжатия</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Игровая индустрия</h3>
+                    <p>Захват игрового процесса и стриминг требуют низкой задержки и высокого качества движения</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Производство контента</h3>
+                    <p>Профессиональное производство использует промежуточные кодеки с минимальными потерями качества</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Социальные сети</h3>
+                    <p>Мобильно-ориентированные платформы оптимизируют для быстрой загрузки и экономии трафика</p>
+                </div>
+            </div>
+
+            <blockquote>
+                <p>Успешное применение видеоформатов требует глубокого понимания специфики каждой области. То, что работает для стриминга фильмов, может быть неприемлемо для видеоконференций, а оптимальные решения для образования отличаются от требований социальных сетей.</p>
+            </blockquote>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('web-tech'),
+                document.getElementById('educational-systems'), 
+                document.getElementById('video-conferencing')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

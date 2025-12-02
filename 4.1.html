@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>4. Области применения - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="3.3.3.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="4.1.1.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="applications">
+            <h1>4 Области применения</h1>           
+            <div class="format-card" id="web-tech">
+                <h2>4.1 Веб-технологии</h2>
+<p>Веб-технологии являются одной из важнейших областей применения современных видеоформатов, поскольку именно через интернет сегодня потребляется большая часть глобального видеоконтента. Быстрое развитие сетевой инфраструктуры, увеличение пропускной способности каналов связи и распространение высокоскоростных мобильных сетей привели к стремительному росту спроса на эффективные и гибкие решения для потоковой доставки видео непосредственно через браузеры.
+
+Современные веб-платформы предъявляют высокие требования к видеоформатам: они должны обеспечивать низкую задержку воспроизведения, экономное потребление трафика, устойчивость к колебаниям сети и совместимость с развитием стандарта HTML5. Одновременно растёт потребность в поддержке высоких разрешений, HDR-контента, увеличенной частоты кадров и интерактивных элементов, что дополнительно усложняет задачу оптимального кодирования и декодирования.
+
+Кроме того, большое значение имеет кроссплатформенность. Видео должно корректно работать на широком спектре устройств — от мобильных телефонов и планшетов до настольных компьютеров, Smart TV и встроенных систем. Это делает важными вопросы аппаратного ускорения, оптимизации энергопотребления и поддержки со стороны основных браузеров и операционных систем.
+
+Таким образом, роль веб-технологий в развитии видеоформатов заключается не только в создании требований к качеству и эффективности, но и в формировании целой экосистемы, которая определяет, какие кодеки будут востребованы, стандартизированы и в конечном итоге получат массовое распространение в интернете.</p>            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('web-tech'),
+                document.getElementById('educational-systems'), 
+                document.getElementById('video-conferencing')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

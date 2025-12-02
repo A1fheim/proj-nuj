@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>3. Сравнительный анализ - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="2.3.3.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="3.1.1.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="comparison-analysis">
+            <h1>3 Сравнительный анализ</h1>
+            
+            <div class="format-card" id="compression-efficiency">
+                <h2>3.1 Эффективность сжатия</h2>
+<p>Эффективность сжатия является одним из ключевых критериев оценки современных видеокодеков и во многом определяет их практическую применимость в реальных системах доставки контента. Под эффективностью понимают способность кодека достигать максимально возможного качества изображения при минимальном размере выходного потока данных. В альтернативной формулировке — это умение сохранять заданный уровень визуальной точности при максимально возможном уменьшении битрейта. Данная характеристика особенно важна в условиях стремительного роста разрешений (4K, 8K и выше), увеличения кадровой частоты, распространения HDR-контента и расширения сетевых сервисов потоковой передачи видео.
+
+Высокая эффективность сжатия позволяет существенно снижать нагрузку на каналы связи, экономить пропускную способность и уменьшать требования к хранилищам данных, что критично как для крупных видеоплатформ, так и для локальных систем видеонаблюдения или мобильных устройств. При этом современные методы оценки эффективности включают не только сравнение объективных метрик, таких как PSNR, SSIM или VMAF, но и анализ субъективного восприятия качества. Пользовательское восприятие стало особенно значимым фактором, поскольку небольшие различия, плохо фиксируемые автоматическими алгоритмами, могут заметно влиять на визуальный комфорт.
+
+Таким образом, эффективность сжатия представляет собой комплексный показатель, сочетающий технические, экономические и перцептивные аспекты, и является одним из основных параметров, определяющих конкурентоспособность видеокодеков нового поколения.</p>            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('compression-efficiency'),
+                document.getElementById('computational-complexity'), 
+                document.getElementById('compatibility')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>4. Области применения - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="4.3.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="4.3.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="applications">
+            <h1>4 Области применения</h1>
+            <div class="format-card" id="video-conferencing">
+                <div id="real-time-encoding">
+                    <h3>4.3.1 Real-time кодирование</h3>
+                    <p>Кодирование в реальном времени требует баланса между качеством и скоростью:</p>
+                    <ol>
+                        <li><span class="bold-text">Скорость кодирования:</span> максимум 100-200 мс задержки</li>
+                        <li><span class="bold-text">Аппаратное ускорение:</span> использование GPU и специализированных чипов</li>
+                        <li><span class="bold-text">Адаптивность:</span> изменение параметров в зависимости от сети</li>
+                        <li><span class="bold-text">Предустановки:</span> оптимизированные профили для различных сценариев</li>
+                    </ol>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Кодек</th>
+                                <th>Real-time пригодность</th>
+                                <th>Качество</th>
+                                <th>Совместимость</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>H.264</td>
+                                <td>Отличная</td>
+                                <td>Хорошее</td>
+                                <td>Универсальная</td>
+                            </tr>
+                            <tr>
+                                <td>H.265</td>
+                                <td>Умеренная</td>
+                                <td>Отличное</td>
+                                <td>Ограниченная</td>
+                            </tr>
+                            <tr>
+                                <td>VP8/VP9</td>
+                                <td>Хорошая</td>
+                                <td>Хорошее</td>
+                                <td>Веб-браузеры</td>
+                            </tr>
+                            <tr>
+                                <td>AV1</td>
+                                <td>Слабая</td>
+                                <td>Превосходное</td>
+                                <td>Новые устройства</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Эволюция аппаратного ускорения кардинально изменила ландшафт real-time кодирования. Современные процессоры и видеокарты включают специализированные блоки для H.264/H.265, позволяя достичь латентности менее 16 мс даже на потребительском оборудовании, что было недостижимо при программном кодировании.</p>
+
+<p>Развитие 5G сетей открывает новые возможности для мобильных видеоконференций, но создает дополнительные требования к адаптивности кодеков для работы с переменными характеристиками беспроводных соединений и управления энергопотреблением мобильных устройств.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('web-tech'),
+                document.getElementById('educational-systems'), 
+                document.getElementById('video-conferencing')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

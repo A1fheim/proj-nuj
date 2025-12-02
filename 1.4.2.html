@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.4.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.4.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            <div class="format-card" id="av1">
+                <div id="av1-open">
+                    <h3>1.4.2 Открытый стандарт</h3>
+                    <p>Ключевые преимущества открытости AV1:</p>
+                    <ol>
+                        <li>Полное отсутствие лицензионных отчислений</li>
+                        <li>Открытый исходный код справочной реализации</li>
+                        <li>Свободное использование в коммерческих продуктах</li>
+                        <li>Активное сообщество разработчиков</li>
+                        <li>Прозрачный процесс стандартизации</li>
+                    </ol>
+                    <p>Патентная политика AV1 основана на принципе "Royalty-Free", где все участники альянса предоставляют безвозмездные лицензии на свои патенты. Это создает правовую определенность для разработчиков и исключает риск неожиданных требований лицензионных выплат в будущем.</p>
+
+<p>Открытая модель разработки AV1 включает публичное тестирование, прозрачное обсуждение технических решений и возможность участия сообщества в процессе стандартизации. Такой подход обеспечивает высокое качество стандарта и широкую поддержку индустрии.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

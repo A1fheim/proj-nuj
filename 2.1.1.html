@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>2. Перспективные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="2.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="2.1.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="perspective-formats">
+            <h1>2 Перспективные форматы</h1>
+            
+            <div class="format-card" id="vvc">
+                <div id="vvc-tech">
+                    <h3>2.1.1 Новые технологии</h3>
+                    <p>VVC включает множество инновационных технологий кодирования:</p>
+                    <ol>
+                        <li><span class="bold-text">Квадратичная древовидная структура с тройным разбиением:</span> более гибкое разделение блоков</li>
+                        <li><span class="bold-text">Множественные типы трансформации:</span> DCT-II, DST-VII, DCT-VIII для различных типов контента</li>
+                        <li><span class="bold-text">Улучшенное внутрикадровое предсказание:</span> 67 угловых режимов и новые неугловые режимы</li>
+                        <li><span class="bold-text">Аффинная компенсация движения:</span> учет вращения, масштабирования и сдвига объектов</li>
+                        <li><span class="bold-text">Bilateral matching:</span> двустороннее сопоставление для улучшения предсказания</li>
+                        <li><span class="bold-text">Адаптивное петлевое фильтрование:</span> ALF для минимизации артефактов сжатия</li>
+                    </ol>
+                    <p>VVC революционизирует традиционный подход к видеокодированию через внедрение адаптивных алгоритмов, способных анализировать характеристики контента в реальном времени. Система множественных типов трансформации позволяет автоматически выбирать наиболее подходящий математический аппарат для каждого блока изображения, что особенно эффективно для сложных текстур и переходных областей.</p>
+
+                    <p>Аффинная компенсация движения представляет качественный скачок в обработке динамических сцен, позволяя точно отслеживать вращение, масштабирование и деформацию объектов. Это критично для современного контента с активной камерной работой, спортивных трансляций и игрового видео.</p>
+                </div>              
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('vvc'),
+                document.getElementById('evc'), 
+                document.getElementById('experimental')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

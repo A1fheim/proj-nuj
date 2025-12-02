@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>3. Сравнительный анализ - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="perspektivnye-formaty.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="oblasti-primeneniya.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="comparison-analysis">
+            <h1>3 Сравнительный анализ</h1>
+            
+            <div class="format-card" id="compression-efficiency">
+                <h2>3.1 Эффективность сжатия</h2>
+                <p>Эффективность сжатия является ключевым критерием оценки видеокодеков. Она определяется способностью кодека обеспечивать максимально возможное качество видео при минимальном размере файла или, альтернативно, минимизировать размер файла при заданном уровне качества.</p>
+                
+                <div id="bitrate-quality">
+                    <h3>3.1.1 Битрейт и качество</h3>
+                    <p>Соотношение битрейт-качество - основной показатель эффективности кодека:</p>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Кодек</th>
+                                <th>Относительная эффективность</th>
+                                <th>Экономия битрейта (по сравнению с H.264)</th>
+                                <th>Оценка качества (PSNR)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>H.264/AVC</td>
+                                <td>Базовый уровень</td>
+                                <td>0% (эталон)</td>
+                                <td>30-40 дБ</td>
+                            </tr>
+                            <tr>
+                                <td>H.265/HEVC</td>
+                                <td>Высокая</td>
+                                <td>40-50%</td>
+                                <td>32-42 дБ</td>
+                            </tr>
+                            <tr>
+                                <td>VP9</td>
+                                <td>Высокая</td>
+                                <td>35-45%</td>
+                                <td>31-41 дБ</td>
+                            </tr>
+                            <tr>
+                                <td>AV1</td>
+                                <td>Очень высокая</td>
+                                <td>50-60%</td>
+                                <td>33-43 дБ</td>
+                            </tr>
+                            <tr>
+                                <td>VVC/H.266</td>
+                                <td>Исключительная</td>
+                                <td>60-70%</td>
+                                <td>35-45 дБ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Добавить в раздел сравнительного анализа -->
+    <div class="video-comparison">
+    <h4>Сравнение качества кодирования</h4>
+    <video width="800" height="450" controls>
+        <source src="comparison_h264_vs_h265.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+    <p>Демонстрация разницы в качестве между H.264 и H.265 при одинаковом битрейте</p>
+</div>
+                
+                <div id="measurement-methods">
+                    <h3>3.1.2 Методы измерения</h3>
+                    <p>Для оценки качества видео используются различные метрики:</p>
+                    <ol>
+                        <li><span class="bold-text">PSNR (Peak Signal-to-Noise Ratio):</span> традиционная математическая метрика</li>
+                        <li><span class="bold-text">SSIM (Structural Similarity Index):</span> учитывает особенности восприятия человека</li>
+                        <li><span class="bold-text">VMAF (Video Multimethod Assessment Fusion):</span> современная метрика от Netflix</li>
+                        <li><span class="bold-text">MS-SSIM:</span> многомасштабная версия SSIM</li>
+                        <li><span class="bold-text">LPIPS:</span> метрика на основе глубокого обучения</li>
+                    </ol>
+                </div>
+                
+                <div id="test-sequences">
+                    <h3>3.1.3 Тестовые последовательности</h3>
+                    <p>Для объективного сравнения используются стандартные тестовые видеопоследовательности:</p>
+                    <ol>
+                        <li><span class="bold-text">HEVC Common Test Conditions:</span> стандартные последовательности ITU-T</li>
+                        <li><span class="bold-text">Xiph.org Test Media:</span> открытые тестовые видео</li>
+                        <li><span class="bold-text">Netflix Public Dataset:</span> реальный контент для практических тестов</li>
+                        <li><span class="bold-text">BVI-HFR:</span> высокочастотные видеопоследовательности</li>
+                        <li><span class="bold-text">JVET Test Sequences:</span> для тестирования VVC</li>
+                    </ol>
+                </div>
+                <div class="efficiency-chart">
+    <img src="codec_efficiency_comparison.png" alt="Сравнение эффективности кодеков" width="800">
+    <p>График сравнения битрейт/качество для различных кодеков</p>
+</div>
+            </div>
+            
+
+            <div class="format-card" id="computational-complexity">
+                <h2>3.2 Вычислительная сложность</h2>
+                <p>Вычислительная сложность определяет практическую применимость видеокодеков в различных сценариях использования. Высокая эффективность сжатия часто достигается за счет увеличения вычислительных требований.</p>
+                
+                <div id="encoding-time">
+                    <h3>3.2.1 Время кодирования</h3>
+                    <p>Сравнительное время кодирования (относительно H.264 как базовой линии):</p>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Кодек</th>
+                                <th>Время кодирования (x264 = 1.0)</th>
+                                <th>Время декодирования</th>
+                                <th>Энергопотребление</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>H.264/AVC</td>
+                                <td>1.0x (быстрое)</td>
+                                <td>Низкое</td>
+                                <td>Низкое</td>
+                            </tr>
+                            <tr>
+                                <td>H.265/HEVC</td>
+                                <td>5-15x (медленное)</td>
+                                <td>Умеренное</td>
+                                <td>Умеренное</td>
+                            </tr>
+                            <tr>
+                                <td>VP9</td>
+                                <td>10-25x (очень медленное)</td>
+                                <td>Высокое</td>
+                                <td>Высокое</td>
+                            </tr>
+                            <tr>
+                                <td>AV1</td>
+                                <td>50-200x (крайне медленное)</td>
+                                <td>Очень высокое</td>
+                                <td>Очень высокое</td>
+                            </tr>
+                            <tr>
+                                <td>VVC/H.266</td>
+                                <td>100-500x (исключительно медленное)</td>
+                                <td>Чрезвычайно высокое</td>
+                                <td>Чрезвычайно высокое</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="hardware-requirements">
+                    <h3>3.2.2 Требования к оборудованию</h3>
+                    <p>Минимальные системные требования для эффективной работы:</p>
+                    <ol>
+                        <li><span class="bold-text">H.264:</span> Любой современный процессор, 2GB RAM</li>
+                        <li><span class="bold-text">H.265:</span> 4-ядерный процессор 2.5+ ГГц, 8GB RAM</li>
+                        <li><span class="bold-text">VP9:</span> 6-ядерный процессор 3.0+ ГГц, 16GB RAM</li>
+                        <li><span class="bold-text">AV1:</span> 8-ядерный процессор 3.5+ ГГц, 32GB RAM</li>
+                        <li><span class="bold-text">VVC:</span> 16-ядерный процессор, 64GB+ RAM</li>
+                    </ol>
+                </div>
+                
+                <div id="power-consumption">
+                    <h3>3.2.3 Энергопотребление</h3>
+                    <p>Энергопотребление при кодировании и декодировании:</p>
+                    <ol>
+                        <li><span class="bold-text">Мобильные устройства:</span> H.264 наиболее энергоэффективен</li>
+                        <li><span class="bold-text">Планшеты:</span> H.265 с аппаратным ускорением приемлем</li>
+                        <li><span class="bold-text">Ноутбуки:</span> VP9 возможен при подключении к сети</li>
+                        <li><span class="bold-text">Десктопы:</span> AV1 доступен для мощных систем</li>
+                        <li><span class="bold-text">Серверы:</span> VVC требует специализированного оборудования</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="format-card" id="compatibility">
+                <h2>3.3 Совместимость</h2>
+                <p>Совместимость определяет практическую применимость видеокодеков в различных экосистемах и платформах. Широкая поддержка позволяет использовать кодек без ограничений по устройствам и программному обеспечению.</p>
+                
+                <div id="browser-support">
+                    <h3>3.3.1 Поддержка браузерами</h3>
+                    <p>Текущее состояние поддержки в популярных браузерах:</p>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Кодек</th>
+                                <th>Chrome</th>
+                                <th>Firefox</th>
+                                <th>Safari</th>
+                                <th>Edge</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>H.264/AVC</td>
+                                <td>Полная</td>
+                                <td>Полная</td>
+                                <td>Полная</td>
+                                <td>Полная</td>
+                            </tr>
+                            <tr>
+                                <td>H.265/HEVC</td>
+                                <td>Частичная*</td>
+                                <td>Нет</td>
+                                <td>Полная</td>
+                                <td>Полная</td>
+                            </tr>
+                            <tr>
+                                <td>VP9</td>
+                                <td>Полная</td>
+                                <td>Полная</td>
+                                <td>Частичная</td>
+                                <td>Полная</td>
+                            </tr>
+                            <tr>
+                                <td>AV1</td>
+                                <td>Полная</td>
+                                <td>Полная</td>
+                                <td>Экспериментальная</td>
+                                <td>Полная</td>
+                            </tr>
+                            <tr>
+                                <td>VVC/H.266</td>
+                                <td>Нет</td>
+                                <td>Нет</td>
+                                <td>Нет</td>
+                                <td>Нет</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><small>* Требует аппаратной поддержки или лицензии</small></p>
+                </div>
+                
+                <div id="hardware-acceleration">
+                    <h3>3.3.2 Аппаратное ускорение</h3>
+                    <p>Доступность аппаратного ускорения по производителям:</p>
+                    <ol>
+                        <li><span class="bold-text">Intel:</span> H.264/H.265 (QuickSync), AV1 (Arc GPU)</li>
+                        <li><span class="bold-text">AMD:</span> H.264/H.265 (VCE), AV1 (RDNA 3)</li>
+                        <li><span class="bold-text">NVIDIA:</span> H.264/H.265 (NVENC), AV1 (RTX 4000)</li>
+                        <li><span class="bold-text">Apple:</span> H.264/H.265 (VideoToolbox), частично AV1</li>
+                        <li><span class="bold-text">Qualcomm:</span> H.264/H.265, экспериментально AV1</li>
+                        <li><span class="bold-text">MediaTek:</span> H.264/H.265, планируется AV1</li>
+                    </ol>
+                </div>
+                
+                <div id="mobile-devices">
+                    <h3>3.3.3 Мобильные устройства</h3>
+                    <p>Поддержка на мобильных платформах:</p>
+                    
+                    <h4>iOS</h4>
+                    <ol>
+                        <li>H.264: полная поддержка с iOS 2.0</li>
+                        <li>H.265: полная поддержка с iOS 11</li>
+                        <li>VP9: ограниченная поддержка через WebKit</li>
+                        <li>AV1: экспериментальная поддержка с iOS 17</li>
+                    </ol>
+                    
+                    <h4>Android</h4>
+                    <ol>
+                        <li>H.264: полная поддержка с Android 1.0</li>
+                        <li>H.265: поддержка с Android 5.0</li>
+                        <li>VP9: поддержка с Android 4.4</li>
+                        <li>AV1: поддержка с Android 10</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>Лучший для стриминга</h3>
+                    <p><strong>AV1</strong> - идеальное соотношение качества и размера файла для современных стриминговых сервисов</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Лучший для совместимости</h3>
+                    <p><strong>H.264</strong> - универсальная поддержка на всех устройствах и платформах</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Лучший для 4K/8K</h3>
+                    <p><strong>H.265</strong> - оптимальный баланс эффективности и доступности для высоких разрешений</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Лучший для веба</h3>
+                    <p><strong>VP9</strong> - отличная поддержка браузерами и отсутствие лицензионных ограничений</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Лучший для будущего</h3>
+                    <p><strong>VVC/H.266</strong> - максимальная эффективность для контента следующего поколения</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>Лучший для бизнеса</h3>
+                    <p><strong>EVC</strong> - предсказуемые лицензионные расходы при хорошей эффективности</p>
+                </div>
+            </div>
+
+            <blockquote>
+                <p>Выбор видеокодека должен основываться на конкретных требованиях проекта: целевой аудитории, доступных ресурсах, требованиях к качеству и ограничениях по совместимости. Универсального решения не существует - каждый кодек имеет свои преимущества в определенных сценариях использования.</p>
+            </blockquote>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('compression-efficiency'),
+                document.getElementById('computational-complexity'), 
+                document.getElementById('compatibility')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

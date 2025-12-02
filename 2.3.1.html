@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>2. Перспективные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="2.3.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="2.3.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="perspective-formats">
+            <h1>2 Перспективные форматы</h1>
+            <div class="format-card" id="experimental">
+                <div id="ai-encoding">
+                    <h3>2.3.1 Машинное обучение в кодировании</h3>
+                    <p>Применение ML-технологий в видеокодировании открывает новые возможности:</p>
+                    <ol>
+                        <li><span class="bold-text">Предсказание движения:</span> нейронные сети для улучшения компенсации движения</li>
+                        <li><span class="bold-text">Режимы кодирования:</span> автоматический выбор оптимальных параметров</li>
+                        <li><span class="bold-text">Пост-обработка:</span> улучшение качества после декодирования</li>
+                        <li><span class="bold-text">Адаптивная квантизация:</span> учет особенностей восприятия человека</li>
+                        <li><span class="bold-text">Супер-разрешение:</span> повышение разрешения при декодировании</li>
+                    </ol>
+                    <p>Двухуровневая архитектура EVC отражает реалии современного видеорынка, где сосуществуют массовые приложения с жесткими ограничениями по стоимости и премиум-сегмент с требованиями к максимальной эффективности. Baseline Profile обеспечивает безопасный переход для разработчиков, опасающихся патентных рисков, в то время как Main Profile предлагает современные возможности с контролируемыми обязательствами.</p>
+
+                    <p>Возможность динамического переключения между профилями в рамках одного потока открывает новые сценарии использования, где критичные сегменты видео могут кодироваться в Main Profile для максимального качества, а остальной контент - в Baseline для минимизации рисков.</p>
+                </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('vvc'),
+                document.getElementById('evc'), 
+                document.getElementById('experimental')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>3. Сравнительный анализ - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="3.1.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="3.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="comparison-analysis">
+            <h1>3 Сравнительный анализ</h1>
+            
+            <div class="format-card" id="compression-efficiency">
+                <div id="test-sequences">
+                    <h3>3.1.3 Тестовые последовательности</h3>
+                    <p>Для объективного сравнения используются стандартные тестовые видеопоследовательности:</p>
+                    <ol>
+                        <li><span class="bold-text">HEVC Common Test Conditions:</span> стандартные последовательности ITU-T</li>
+                        <li><span class="bold-text">Xiph.org Test Media:</span> открытые тестовые видео</li>
+                        <li><span class="bold-text">Netflix Public Dataset:</span> реальный контент для практических тестов</li>
+                        <li><span class="bold-text">BVI-HFR:</span> высокочастотные видеопоследовательности</li>
+                        <li><span class="bold-text">JVET Test Sequences:</span> для тестирования VVC</li>
+                    </ol>
+                </div>
+                <div class="efficiency-chart">
+                <img src="codec_efficiency_comparison.png" alt="Сравнение эффективности кодеков" width="800">
+                <p>График сравнения битрейт/качество для различных кодеков</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('compression-efficiency'),
+                document.getElementById('computational-complexity'), 
+                document.getElementById('compatibility')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

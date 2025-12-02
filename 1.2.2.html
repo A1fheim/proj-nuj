@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.2.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.2.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            <div class="format-card" id="h265">
+                <div id="h265-compression">
+                    <h3>1.2.2 Алгоритмы сжатия</h3>
+                    <p>HEVC включает множество улучшений для повышения эффективности сжатия:</p>
+                    <ol>
+                        <li><span class="bold-text">Расширенное внутрикадровое предсказание:</span> 35 угловых режимов</li>
+                        <li><span class="bold-text">Улучшенная компенсация движения:</span> поддержка асимметричных разделений</li>
+                        <li><span class="bold-text">Sample Adaptive Offset (SAO):</span> фильтр для уменьшения артефактов</li>
+                        <li><span class="bold-text">Параллельная обработка:</span> поддержка Wavefront Parallel Processing</li>
+                    </ol>
+                    <p>Система множественных режимов внутрикадрового предсказания в HEVC позволяет точно моделировать направленные структуры в изображении - от вертикальных и горизонтальных линий до диагональных текстур. Это особенно эффективно для архитектурного контента и графических элементов.</p>
+
+<p>Алгоритм Sample Adaptive Offset представляет качественно новый подход к пост-обработке, где коррекция применяется не глобально, а адаптивно к локальным характеристикам изображения, что позволяет устранять артефакты сжатия без потери детализации в других областях кадра.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

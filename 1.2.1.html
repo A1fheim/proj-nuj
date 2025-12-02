@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>1. Основные современные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="1.2.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="1.2.2.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="h264-section">
+            <h1>1 Основные современные форматы</h1>
+            <div class="format-card" id="h265">
+                <div id="h265-arch">
+                    <h3>1.2.1 Архитектура кодека</h3>
+                    <p>HEVC использует более гибкую структуру блоков по сравнению с H.264:</p>
+                    <ol>
+                        <li><span class="bold-text">Coding Tree Units (CTU):</span> размером до 64x64 пикселей</li>
+                        <li><span class="bold-text">Квадратичная древовидная структура:</span> рекурсивное разделение блоков</li>
+                        <li><span class="bold-text">Prediction Units (PU):</span> для предсказания движения и внутрикадрового предсказания</li>
+                        <li><span class="bold-text">Transform Units (TU):</span> для применения дискретного косинусного преобразования</li>
+                    </ol>
+                    <p>Революционным нововведением HEVC стала возможность адаптивного выбора размера кодируемых единиц от 4x4 до 64x64 пикселей в зависимости от сложности изображения. Это позволяет использовать большие блоки для однородных областей (небо, стены) и мелкие блоки для детализированных участков (текстуры, лица).</p>
+
+<p>Иерархическая структура разделения блоков в H.265 обеспечивает оптимальный баланс между точностью представления и эффективностью сжатия, автоматически подстраиваясь под локальные характеристики изображения без необходимости предварительного анализа контента.</p>
+                </div>
+
+                <div class="architecture-diagram">
+                <img src="h265_architecture.png" alt="Архитектура H.265/HEVC" width="700">
+                <p>Блок-схема архитектуры кодека H.265/HEVC</p> 
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Подключение навигации
+        fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Инициализация навигации после загрузки
+            setTimeout(() => {
+                const upButton = document.getElementById('up');
+                const downButton = document.getElementById('down');
+                
+                // Массив всех основных разделов в порядке появления на странице
+                const sections = [
+                    document.getElementById('h264'),
+                    document.getElementById('h265'), 
+                    document.getElementById('vp9'),
+                    document.getElementById('av1')
+                ];
+                
+                let currentSectionIndex = 0;
+                
+                function goToSection(index) {
+                    if (index >= 0 && index < sections.length && sections[index]) {
+                        currentSectionIndex = index;
+                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (upButton && downButton) {
+                    upButton.addEventListener('click', () => {
+                        if (currentSectionIndex > 0) {
+                            goToSection(currentSectionIndex - 1);
+                        }
+                    });
+                    
+                    downButton.addEventListener('click', () => {
+                        if (currentSectionIndex < sections.length - 1) {
+                            goToSection(currentSectionIndex + 1);
+                        }
+                    });
+                }
+                
+                // Определение текущего раздела при скролле
+                window.addEventListener('scroll', () => {
+                    let current = 0;
+                    sections.forEach((section, index) => {
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= window.innerHeight / 3) {
+                                current = index;
+                            }
+                        }
+                    });
+                    currentSectionIndex = current;
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

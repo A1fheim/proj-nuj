@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>4. Области применения - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="4.2.3.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="4.3.1.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="applications">
+            <h1>4 Области применения</h1>
+            <div class="format-card" id="video-conferencing">
+                <h2>4.3 Видеоконференции</h2>
+<p>Видеоконференции стали неотъемлемой частью современного делового взаимодействия, удалённой работы и распределённых команд. Они используются в корпоративной коммуникации, образовании, медицине, государственном управлении и множестве других сфер, где требуется оперативный обмен информацией и визуальный контакт. Переход к онлайн-форматам усилил требования к качеству видеосвязи, устойчивости соединения и минимальной задержке, что создаёт уникальные вызовы при выборе и применении видеоформатов.
+
+Технологии видеоконференций работают в условиях строгих ограничений реального времени: задержка, превышающая сотни миллисекунд, уже заметно ухудшает взаимодействие и приводит к потере естественности общения. Поэтому кодеки для видеоконференций должны обеспечивать не только приемлемое качество изображения при низких битрейтах, но и предельно быструю обработку кадра — как на стороне отправителя, так и на стороне получателя. Высокая вычислительная сложность в таких сценариях неприемлема, поскольку она увеличивает задержки и может вызывать зависания или ухудшение качества в условиях нестабильной сети.
+
+Существенную роль играет адаптивность. Видео должно динамически подстраиваться под изменения пропускной способности канала связи, снижая битрейт, разрешение или частоту кадров без заметных артефактов. Многие современные форматы и протоколы включают встроенные механизмы компенсации потерь пакетов и контроля качества в реальном времени, что позволяет сохранять стабильность соединения даже при значительных сетевых колебаниях.
+
+Таким образом, выбор видеоформата для видеоконференций определяется балансом между качеством, скоростью кодирования и декодирования, устойчивостью к потерям данных и возможностью мгновенной адаптации к сетевым условиям, что делает эту область одной из наиболее требовательных к видеотехнологиям.</p>            </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('web-tech'),
+                document.getElementById('educational-systems'), 
+                document.getElementById('video-conferencing')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

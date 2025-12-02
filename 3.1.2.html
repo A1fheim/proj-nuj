@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>3. Сравнительный анализ - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="3.1.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="3.1.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+<div class="main">
+    <section id="comparison-analysis">
+        <h1>3 Сравнительный анализ</h1>
+        <div class="format-card" id="compression-efficiency">
+            <div id="measurement-methods">
+                <h3>3.1.2 Методы измерения</h3>
+                <p>
+                    Для оценки качества видео используется широкий набор объективных и субъективных метрик, 
+                    каждая из которых по-разному отражает визуальное восприятие и технические характеристики 
+                    изображения. Корректный выбор метрики особенно важен при сравнительном анализе 
+                    современных и перспективных видеоформатов, поскольку одни и те же последовательности 
+                    могут показывать разные результаты в зависимости от используемого способа оценки.
+                </p>
+                <ol>
+                    <li>
+                        <span class="bold-text">PSNR (Peak Signal-to-Noise Ratio):</span>
+                        классическая математическая метрика, основанная на сравнении разницы между исходным
+                        и декодированным изображением на уровне пикселей. Показывает отношение максимального
+                        сигнала к уровню шумов, возникающих после сжатия. Широко используется благодаря
+                        простоте расчёта и воспроизводимости, но при этом слабо учитывает особенности
+                        человеческого восприятия и локальные искажения.
+                    </li>
+                    <li>
+                        <span class="bold-text">SSIM (Structural Similarity Index):</span>
+                        метрика, учитывающая яркость, контраст и структуру изображения, то есть более тесно
+                        связанная с субъективным восприятием человека. Вместо простого сравнения разницы по
+                        пикселям SSIM анализирует локальные области кадра, оценивая, насколько сохранены
+                        структурные элементы сцены, текстуры и контуры объектов.
+                    </li>
+                    <li>
+                        <span class="bold-text">VMAF (Video Multimethod Assessment Fusion):</span>
+                        современная комплексная метрика, разработанная компанией Netflix. Объединяет
+                        несколько методов анализа и использует машинное обучение для приближения к
+                        субъективным оценкам зрителей. VMAF показывает высокую корреляцию с реальным
+                        пользовательским опытом и поэтому часто применяется для оценки качества потокового
+                        видео и сравнения новых видеокодеков.
+                    </li>
+                    <li>
+                        <span class="bold-text">MS-SSIM:</span>
+                        многомасштабная версия SSIM, которая выполняет оценку схожести изображений на
+                        нескольких уровнях разрешения. Такой подход позволяет одновременно учитывать
+                        глобальные особенности сцены и мелкие детали, что делает MS-SSIM более чувствительной
+                        и точной метрикой по сравнению с базовым SSIM, особенно для высокодетализированных
+                        и HDR-сцен.
+                    </li>
+                    <li>
+                        <span class="bold-text">LPIPS:</span>
+                        метрика на основе глубокого обучения, использующая признаки, извлекаемые
+                        нейросетевыми моделями. Она оценивает визуальное сходство изображений так, как его
+                        «видит» обученная нейросеть, настроенная на человеческие оценки качества. LPIPS
+                        хорошо улавливает сложные искажения и часто применяется при исследовании
+                        нейросетевых методов сжатия и генеративных моделей.
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('compression-efficiency'),
+                document.getElementById('computational-complexity'), 
+                document.getElementById('compatibility')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>

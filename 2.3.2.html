@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>2. Перспективные форматы - Современные и перспективные видеоформаты</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button id="up" class="arrow-button">↑</button>
+        <div class="arrow-left-right">
+            <button id="left" class="arrow-button"><a href="2.3.1.html">←</a></button>
+            <button id="right" class="arrow-button"><a href="2.3.3.html">→</a></button>
+        </div>
+        <button id="down" class="arrow-button">↓</button>
+    </div>
+
+    <div class="main">
+        <section id="perspective-formats">
+            <h1>2 Перспективные форматы</h1>
+            <div class="format-card" id="experimental">
+                <div id="neural-networks">
+                    <h3>2.3.2 Нейронные сети</h3>
+                    <p>Различные архитектуры нейронных сетей находят применение в видеокодировании:</p>
+                    <ol>
+                        <li><span class="bold-text">Сверточные сети (CNN):</span> для пространственного предсказания и фильтрации</li>
+                        <li><span class="bold-text">Рекуррентные сети (RNN/LSTM):</span> для временного предсказания</li>
+                        <li><span class="bold-text">Автоэнкодеры:</span> для прямого сжатия изображений и видео</li>
+                        <li><span class="bold-text">Генеративно-состязательные сети (GAN):</span> для улучшения качества</li>
+                        <li><span class="bold-text">Трансформеры:</span> для глобального контекста в видео</li>
+                    </ol>
+                    <p>Интеграция различных архитектур нейронных сетей в единую систему видеокодирования представляет одну из наиболее сложных инженерных задач современности. Каждый тип сети оптимален для определенных аспектов видеоданных: CNN превосходно обрабатывают пространственные корреляции, RNN эффективны для временных зависимостей, а трансформеры способны учитывать долгосрочный контекст.</p>
+
+                    <p>Особый интерес представляют гибридные архитектуры, где традиционные методы кодирования комбинируются с ML-компонентами для решения специфических задач - например, использование GAN для пост-обработки артефактов сжатия или применение attention-механизмов для улучшения предсказания движения в сложных сценах.</p>
+                </div>
+        </section>
+    </div>
+
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+        document.body.insertAdjacentHTML('afterbegin', data);
+        
+        setTimeout(() => {
+            const upButton = document.getElementById('up');
+            const downButton = document.getElementById('down');
+            
+            const sections = [
+                document.getElementById('vvc'),
+                document.getElementById('evc'), 
+                document.getElementById('experimental')
+            ];
+            
+            let currentSectionIndex = 0;
+            
+            function goToSection(index) {
+                if (index >= 0 && index < sections.length && sections[index]) {
+                    currentSectionIndex = index;
+                    sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            if (upButton && downButton) {
+                upButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        goToSection(currentSectionIndex - 1);
+                    }
+                });
+                
+                downButton.addEventListener('click', () => {
+                    if (currentSectionIndex < sections.length - 1) {
+                        goToSection(currentSectionIndex + 1);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', () => {
+                let current = 0;
+                sections.forEach((section, index) => {
+                    if (section) {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight / 3) {
+                            current = index;
+                        }
+                    }
+                });
+                currentSectionIndex = current;
+            });
+        }, 100);
+    });
+</script>
+</body>
+</html>
