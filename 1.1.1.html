@@ -40,64 +40,43 @@
         </section>
     </div>
 
-    <script>
-        // Подключение навигации
-        fetch('navigation.html')
+<script>
+    // Подключение навигации
+    fetch('navigation.html')
         .then(response => response.text())
         .then(data => {
             document.body.insertAdjacentHTML('afterbegin', data);
-            
+
             // Инициализация навигации после загрузки
             setTimeout(() => {
                 const upButton = document.getElementById('up');
                 const downButton = document.getElementById('down');
-                
-                // Массив всех основных разделов в порядке появления на странице
-                const sections = [
-                    document.getElementById('h264'),
-                    document.getElementById('h265'), 
-                    document.getElementById('vp9'),
-                    document.getElementById('av1')
-                ];
-                
-                let currentSectionIndex = 0;
-                
-                function goToSection(index) {
-                    if (index >= 0 && index < sections.length && sections[index]) {
-                        currentSectionIndex = index;
-                        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-                
-                if (upButton && downButton) {
+
+                if (upButton) {
                     upButton.addEventListener('click', () => {
-                        if (currentSectionIndex > 0) {
-                            goToSection(currentSectionIndex - 1);
-                        }
-                    });
-                    
-                    downButton.addEventListener('click', () => {
-                        if (currentSectionIndex < sections.length - 1) {
-                            goToSection(currentSectionIndex + 1);
-                        }
+                        // Листаем страницу вверх на высоту окна
+                        window.scrollBy({
+                            top: -window.innerHeight,
+                            left: 0,
+                            behavior: 'smooth'
+                        });
                     });
                 }
-                
-                // Определение текущего раздела при скролле
-                window.addEventListener('scroll', () => {
-                    let current = 0;
-                    sections.forEach((section, index) => {
-                        if (section) {
-                            const rect = section.getBoundingClientRect();
-                            if (rect.top <= window.innerHeight / 3) {
-                                current = index;
-                            }
-                        }
+
+                if (downButton) {
+                    downButton.addEventListener('click', () => {
+                        // Листаем страницу вниз на высоту окна
+                        window.scrollBy({
+                            top: window.innerHeight,
+                            left: 0,
+                            behavior: 'smooth'
+                        });
                     });
-                    currentSectionIndex = current;
-                });
+                }
             }, 100);
         });
-    </script>
+</script>
+
 </body>
+
 </html>
